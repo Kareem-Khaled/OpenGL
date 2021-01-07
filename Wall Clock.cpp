@@ -1,8 +1,3 @@
-﻿/**
-* Name : Kareem Khaled Ali Ahmed 
-* Section : 2 Cs
-**/
-
 #include <GL\glut.h>
 #include<cmath>
 GLfloat pi = acos(-1), r = 60, r2 = 55;
