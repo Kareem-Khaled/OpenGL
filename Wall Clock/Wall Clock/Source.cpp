@@ -44,7 +44,7 @@ void RenderScene(){
 
 	// hours
 	glPushMatrix(); glRotatef(Hang, 0.0f, 0.0f, -1.0f);
-	glLineWidth(8); 
+	glLineWidth(8);
 	glBegin(GL_LINES);
 	glVertex2f(0, -3); glVertex2f(0, 35);
 	glEnd(); glPopMatrix();
@@ -86,7 +86,7 @@ void TimerFunction(int value){
 
 int main(int argc, char* argv[]){
 	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_DOUBLE| GLUT_RGB);
+	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
 	glutInitWindowSize(800, 600);
 	glutCreateWindow("Kemo ClocK");
 	glutReshapeFunc(ChangeSize);
