@@ -94,9 +94,9 @@ void isDie(){
 // to know if the snake ate the food
 void isEat(){
 	if (abs(snake[0].x - foodX) <= speed && abs(snake[0].y - foodY) <= speed){
-		snake.push_back(body(0, 0));
-		snake.push_back(body(0, 0));
-		snake.push_back(body(0, 0));
+		snake.push_back(path.back());
+		snake.push_back(path.back());
+		snake.push_back(path.back());
 
 		eat = 1; size++; score += scoreUp;
 		sound();
