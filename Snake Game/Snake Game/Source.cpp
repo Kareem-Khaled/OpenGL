@@ -74,7 +74,7 @@ void isDie(){
 // to know if the snake ate the food
 void isEat(){
 	if (abs(snake[0].x - foodX) <= speed && abs(snake[0].y - foodY) <= speed){
-		snake.push_back(path[path.size() - 1]);
+		snake.push_back(path.back());
 		eat = 1; size++;
 	}
 	// to increase snake speed
@@ -93,7 +93,7 @@ void RenderScene(){
 	// snake body
 	glColor3f(1.0, 1.0, 1.0);
 	for (GLshort i = 1; i < snake.size(); i++){
-		glVertex2f(snake[i].x, snake[i].y);
+	    glVertex2f(snake[i].x, snake[i].y);
 	}
 	glEnd();
 
