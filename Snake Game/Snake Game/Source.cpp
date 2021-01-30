@@ -1,7 +1,7 @@
-#include <string>	 // to use string and it's function
+#include <string>	 // to use string and it's functions
 #include <time.h>	 // to create random numbers
-#include <deque>     // useful data structure
-#include <GL\glut.h> // usnig OpenGL
+#include <deque>    	 // useful data structure
+#include <GL\glut.h>	 // usnig OpenGL
 
 GLshort foodX, foodY, speed, size;
 GLboolean u, l, r, d, eat;
@@ -30,10 +30,9 @@ GLsizei randomFood(GLsizei min, GLsizei max) {
 
 // initialize elements
 void SetupRc(){
-	width = 100, height = 100;
+	width = 100, height = 100;  speed = 2;
 	foodX = randomFood(-width + 1, width - 1);
 	foodY = randomFood(-height + 1, height - 1);
-	speed = 2;
 	snake.push_back(body(0, 0));
 	path.push_back(body(0, 0));
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);  // Screen Color (Black)
@@ -66,7 +65,8 @@ void isDie(){
 		if (snake[0] == path[i]){
 			l = 0, r = 0, d = 0, u = 0, eat = 0, size = 0, speed = 2;
 			path.clear(); snake.clear();
-			snake.push_back(body(0, 0)); path.push_back(body(0, 0));
+			snake.push_back(body(0, 0));
+			path.push_back(body(0, 0));
 		}
 	}
 }
@@ -74,14 +74,12 @@ void isDie(){
 // to know if the snake ate the food
 void isEat(){
 	if (abs(snake[0].x - foodX) <= speed && abs(snake[0].y - foodY) <= speed){
-		snake.push_back(body(path[path.size() - 1]));
+		snake.push_back(path[path.size() - 1]);
 		eat = 1; size++;
 	}
 	// to increase snake speed
-	if (size == 4){
-		if (speed < 3)
-			speed++;
-	}
+	if (size && !(size % 4) && speed < 3)
+		speed++;
 }
 
 // paint snake body & food
@@ -156,12 +154,12 @@ void TimerFunction(int value){
 int main(int argc, char* argv[]){
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
-	glutInitWindowSize(600, 600);				  // identify window size
-	glutCreateWindow("Kemo Snake");				 // window name :)
-	glutReshapeFunc(ChangeSize);				// know if window is resized
-	glutSpecialUpFunc(SpecialKeys);			   // to use keys
-	glutDisplayFunc(RenderScene);			  // to paint the shapes
-	glutTimerFunc(30, TimerFunction, 1);	 // to timer the whole game
-	SetupRc();								// to initialize elements
-	glutMainLoop();						   // starting of everything
+	glutInitWindowSize(600, 600);		  // identify window size
+	glutCreateWindow("Kemo Snake");		 // window name :)
+	glutReshapeFunc(ChangeSize);		// know if window is resized
+	glutSpecialUpFunc(SpecialKeys);		// to use keys
+	glutDisplayFunc(RenderScene);		// to paint the shapes
+	glutTimerFunc(30, TimerFunction, 1);	// to timer the whole game
+	SetupRc();				// to initialize elements
+	glutMainLoop();				// starting of everything
 }
