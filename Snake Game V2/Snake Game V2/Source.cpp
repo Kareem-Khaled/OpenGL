@@ -94,18 +94,16 @@ void isDie(){
 // to know if the snake ate the food
 void isEat(){
 	if (abs(snake[0].x - foodX) <= speed && abs(snake[0].y - foodY) <= speed){
-		snake.push_back(body(0,0));
-		snake.push_back(body(0,0));
-		snake.push_back(body(0,0));
+		snake.push_back(body(0, 0));
+		snake.push_back(body(0, 0));
+		snake.push_back(body(0, 0));
 
 		eat = 1; size++; score += scoreUp;
 		sound();
 	}
 	// to increase snake speed
-	if (size == 4){
-		if (speed < 4)
-			speed++;
-	}
+	if (size && !(size % 4) && speed < 3)
+		speed++;
 }
 
 // to paint the Score
