@@ -1,8 +1,8 @@
-#include <string>	 // to use string and it's function
+#include <string>	 // to use string and it's functions
 #include <time.h>	 // to create random numbers
-#include <deque>     // useful data structure
-#include <Windows.h> // communication with the OS or filesystem
-#include <GL\glut.h> // usnig OpenGL
+#include <deque>    	 // useful data structure
+#include <Windows.h>	 // communication with the OS or filesystem
+#include <GL\glut.h> 	 // usnig OpenGL
 
 GLshort foodX, foodY, speed, size, score, scoreUp, trapX, trapY;
 GLboolean u, l, r, d, eat;
@@ -94,9 +94,9 @@ void isDie(){
 // to know if the snake ate the food
 void isEat(){
 	if (abs(snake[0].x - foodX) <= speed && abs(snake[0].y - foodY) <= speed){
-		snake.push_back(body(path[path.size() - 1]));
-		snake.push_back(body(path[path.size() - 1]));
-		snake.push_back(body(path[path.size() - 1]));
+		snake.push_back(body(0,0));
+		snake.push_back(body(0,0));
+		snake.push_back(body(0,0));
 
 		eat = 1; size++; score += scoreUp;
 		sound();
@@ -197,14 +197,14 @@ void TimerFunction(int value){
 int main(int argc, char* argv[]){
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
-	glutInitWindowSize(600, 600);					// identify window size
+	glutInitWindowSize(600, 600);				     // identify window size
 	glutInitWindowPosition((glutGet(GLUT_SCREEN_WIDTH) - 600) / 2,
-		(glutGet(GLUT_SCREEN_HEIGHT) - 600) / 2); // identify window position to be centered
-	glutCreateWindow("Kemo Snake");				 // window name :)
-	glutReshapeFunc(ChangeSize);				// know if window is resized
-	glutSpecialUpFunc(SpecialKeys);			   // to use keys
-	glutDisplayFunc(RenderScene);			  // to paint the shapes
-	glutTimerFunc(30, TimerFunction, 1);	 // to timer the whole game
-	SetupRc();								// to initialize elements
-	glutMainLoop();						   // starting of everything
+		(glutGet(GLUT_SCREEN_HEIGHT) - 600) / 2); 	   // identify window position to be centered
+	glutCreateWindow("Kemo Snake");				  // window name :)
+	glutReshapeFunc(ChangeSize);			  	 // know if window is resized
+	glutSpecialUpFunc(SpecialKeys);			 	// to use keys
+	glutDisplayFunc(RenderScene);			       // to paint the shapes
+	glutTimerFunc(30, TimerFunction, 1);	 	      // to timer the whole game
+	SetupRc();					     // to initialize elements
+	glutMainLoop();					    // starting of everything
 }
