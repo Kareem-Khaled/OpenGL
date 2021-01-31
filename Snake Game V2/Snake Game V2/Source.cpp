@@ -199,7 +199,7 @@ void TimerFunction(int value){
 
 int main(int argc, char* argv[]){
 	glutInit(&argc, argv);
-	currPath = argv[0];                                // to get the current *.exe path
+	currPath = argv[0];                             	      // to get the current *.exe path
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 	glutInitWindowSize(600, 600);				     // identify window size
 	glutInitWindowPosition((glutGet(GLUT_SCREEN_WIDTH) - 600) / 2,
