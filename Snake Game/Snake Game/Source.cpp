@@ -99,8 +99,9 @@ void RenderScene(){
 
 	if (!eat){
 		glPointSize(8);
-		glColor3f(1.0, 1.0, 0.0);
 		glBegin(GL_POINTS);
+		// food
+		glColor3f(1.0, 1.0, 0.0);
 		glVertex2f(foodX, foodY);
 		glEnd();
 	}
@@ -146,7 +147,6 @@ void TimerFunction(int value){
 		foodY = randomFood(-height + 1, height - 1);
 		eat = 0;
 	}
-
 	glutPostRedisplay();
 	glutTimerFunc(30, TimerFunction, 1);
 }

@@ -7,17 +7,8 @@
 GLshort foodX, foodY, speed, size, score, scoreUp, trapX, trapY;
 GLboolean u, l, r, d, eat;
 GLfloat width, height;
+std::string currPath;
 GLbyte soungId;
-
-void sound(){
-	// specify sound location and name
-	std::string str = "sound\\"; str += soungId; str += ".wav";
-	LPCSTR lpcstr = str.c_str();
-	PlaySound(lpcstr, NULL, SND_FILENAME | SND_ASYNC);
-	soungId++;
-	if (soungId == '9')
-		soungId = '0';
-}
 
 // snake body
 struct body{
@@ -50,6 +41,10 @@ void SetupRc(){
 	snake.push_back(body(0, 0));
 	path.push_back(body(0, 0));
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);  // Screen Color (Black)
+
+	// removing *.exe from the path
+	while (currPath.back() != '\\')
+		currPath.pop_back();
 }
 
 // to prevent resizing window 
@@ -58,6 +53,16 @@ void ChangeSize(GLsizei w, GLsizei h) {
 	glutReshapeWindow(600, 600);
 	glOrtho(-width, width, -height, height, -1, 1);
 	glMatrixMode(GL_MODELVIEW); glLoadIdentity();
+}
+
+void sound(){
+	// specify soung location and it's name
+	std::string soung = currPath + "sound\\"; soung += soungId; soung += ".wav";
+	LPCSTR lpcstr = soung.c_str();
+	PlaySound(lpcstr, NULL, SND_FILENAME | SND_ASYNC);
+	soungId++;
+	if (soungId == '9') 
+		soungId = '0';
 }
 
 // to move the snake
@@ -98,8 +103,7 @@ void isEat(){
 		snake.push_back(path.back());
 		snake.push_back(path.back());
 
-		eat = 1; size++; score += scoreUp;
-		sound();
+		eat = 1; size++; score += scoreUp; sound();
 	}
 	// to increase snake speed
 	if (size && !(size % 4) && speed < 3)
@@ -129,16 +133,18 @@ void RenderScene(){
 		glVertex2f(snake[i].x, snake[i].y);
 	}
 	glEnd();
-
 	if (!eat){
 		glPointSize(8);
-		glColor3f(1.0, 1.0, 0.0);
 		glBegin(GL_POINTS);
+		// food 
+		glColor3f(1.0, 1.0, 0.0);
 		glVertex2f(foodX, foodY);
+		// trap
 		glColor3f(1.0, 0.9, 0.0);
 		glVertex2f(trapX, trapY);
 		glEnd();
 	}
+	// score
 	glColor3f(0.0, 1.0, 0.0);
 	drawScore(std::to_string(score));
 	glFlush();
@@ -187,13 +193,13 @@ void TimerFunction(int value){
 		if (size % 8 == 0)
 			scoreUp *= 2;
 	}
-
 	glutPostRedisplay();
 	glutTimerFunc(30, TimerFunction, 1);
 }
 
 int main(int argc, char* argv[]){
 	glutInit(&argc, argv);
+	currPath = argv[0];                                // to get the current *.exe path
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 	glutInitWindowSize(600, 600);				     // identify window size
 	glutInitWindowPosition((glutGet(GLUT_SCREEN_WIDTH) - 600) / 2,
