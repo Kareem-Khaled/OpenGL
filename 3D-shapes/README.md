@@ -1,5 +1,5 @@
-<h1>Project showing the rotation of a group of planets around the sun and the rotation of a group of moons around the planets</h1>
+<h1>We can rotate each shape using <i>(up/down/left/right</i> arrow keys)</h1>
 
-![planets](https://user-images.githubusercontent.com/53629881/163655963-971ed1af-a0ef-4591-9246-fc101282fe08.gif)
+![3d](https://user-images.githubusercontent.com/53629881/196587723-d29466a2-9b46-4b68-9e2a-1c48c8434c87.gif)
 
 <h3>- <em>Tools and technologies used: C++, OpenGl, Visual Studio</h3>
